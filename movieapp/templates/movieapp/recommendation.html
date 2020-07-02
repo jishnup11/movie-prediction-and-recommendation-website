@@ -1,0 +1,99 @@
+{% extends 'movieapp/base.html'%}
+{% load static %}
+{%block css%}
+<link href="{% static 'movieapp/css/recommendation.css' %}" rel="stylesheet">
+{% endblock %}
+
+ {%block content%}
+<main>
+ <div>
+   <div id='search'>
+   <div class="section" >
+      <h5> Rate Movies</h5>
+<div class="cont">
+ <div class="row" >
+ {% for movie in mov %}
+ <div class="col s12 m7 l4">
+    <h2 class="header"></h2>
+    <div class="card horizontal ">
+      <div class="card-image">
+        <a href="/static/movieapp/poster/{{movie.movieid}}p.jpg">
+          <img src="/static/movieapp/poster/{{movie.movieid}}p.jpg" alt="{{movie.moviename}}">
+        </a>
+      </div>
+      <div class="card-stacked">
+        <div class="card-content">
+          <b>{{movie.moviename}}</b>
+          {% if rating and id == movie.movieid %}
+        <b>  <h6>Rated :{{rating}}/5</h6></b>
+          {% endif %}
+          <div class="movie-genre">{{movie.genre}}</div>
+        </div>
+        <div class="card-action">
+          <form action="{% url 'reco'%}" method="post">
+          {% csrf_token %}
+          {% if id != movie.movieid %}
+          <input type="hidden" name="id" value={{movie.movieid}}>
+          <input type="text" name="rat" placeholder="Rate out of 5" required >
+          <input type="submit" class="waves-effect waves-light btn  teal darken-4 btnbtn" value="Rate">
+          {% endif %}
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endfor%}
+  </div>
+ </div>
+</div>
+<div class="divider"></div>
+<div class="section">
+  <div class="pagination">
+      <span class="step-links">
+          {% if contacts.has_previous %}
+              <a href="?page={{ contacts.previous_page_number }}" class="waves-effect waves-light btn  teal darken-4 btnbtn">previous</a>
+          {% endif %}
+
+          <span class="current">
+              Page {{ contacts.number }} of {{ contacts.paginator.num_pages }}.
+          </span>
+
+          {% if contacts.has_next %}
+              <a href="?page={{ contacts.next_page_number }}" class="waves-effect waves-light btn  teal darken-4 btnbtn">next</a>
+          {% endif %}
+      </span>
+  </div>
+</div>
+</div>
+<div class="divider"></div>
+<div class="section">
+      <h5> Recommendations</h5>
+<div class="cont">
+<div class="row">
+{% for movie in recommended %}
+<div class="col s12 m7 l4">
+   <h2 class="header"></h2>
+   <div class="card horizontal">
+     <div class="card-image ">
+       <a href="/static/movieapp/poster/{{movie.movieid}}p.jpg">
+         <img src="/static/movieapp/poster/{{movie.movieid}}p.jpg" alt={{movie.moviename}}>
+       </a>
+     </div>
+     <div class="card-stacked">
+       <div class="card-content">
+         <b>{{movie.moviename}}</b>
+         <div class="movie-genre">{{movie.genre}}</div>
+        </div>
+       <div class="card-action">
+      </div>
+     </div>
+   </div>
+ </div>
+{% endfor %}
+</div>
+</div>
+    </div>
+</div>
+</main>
+{% endblock %}
+      <!-- recommendation ends here -->

@@ -1,0 +1,45 @@
+body{
+  background-color: #eceff1;
+  /*background: url("../collage.png");*/
+}
+/*.navblur{
+  background: url("../1.png");
+  background-repeat: no-repeat;
+  background-size: 100% 300%;
+
+}*/
+  .input-field{
+    border-radius: 6rem;
+
+  }
+  .material-icons{
+    font-size: 40px;
+  }
+  .col{
+    float: left;
+
+  }
+  .cont{
+        margin-left: 2%;
+        margin-right: 2%;
+
+      }
+  .searchbx{
+    width: auto;
+    height:auto;
+    margin-top: 2%;
+  }
+
+header{
+  display: flex;
+
+}
+main{
+  display: flex;
+
+}
+
+
+.navsize{
+  font-size: 18px;
+}
